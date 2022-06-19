@@ -2,14 +2,13 @@
 
 url='http://127.0.0.1:8000/v1/customer'
 
-i=1
 name=张三_
 email=zhangsan_@qq.com
 wechatId=zhangsan_
 wechatNickname=张三_
 sex=(WOMAN MAN UNKNOWN)
-region=(广州 上海 武汉 长沙 北京 深圳 四川 东莞 西安)
-post=(COO 前端工程师 CEO 后端开发工程师 UI工程师 运维工程师 HR)
+region=(广州 上海 武汉 长沙 北京 深圳 四川 东莞 西安 云南 桂林)
+post=(COO 前端工程师 CEO 后端开发工程师 UI工程师 运维工程师 HR 实习生)
 tag=(A B C D)
 
 # return a random value in target array
@@ -25,7 +24,8 @@ function rand_value_in_array(){
 }
 
 
-while [ $i -le 1 ]
+i=1
+while [ $i -le 100 ]
 do
   name_tmp=${name/_/$i}
   email_tmp=${email/_/$i}
@@ -43,7 +43,10 @@ do
     mobile_tmp=$mobile_tmp$((RANDOM%10))
   done
 
-  curl -X 'POST' $url \
+  echo $name_tmp, $email_tmp, $wechatId_tmp, $wechatNickname_tmp, $sex_tmp, $region_tmp, $mobile_tmp, $post_tmp, $tag_tmp
+
+  curl -X 'POST' \
+       $url \
        -H 'accept: application/json' \
        -H 'Content-Type: application/json' \
        -d '{
